@@ -29,12 +29,11 @@
         <section class="exercice">
             <h2 class="exercice-ttl">Question 1</h2>
             <p class="exercice-txt">Ecrivez la phrase suivante dans une balise HTML P en utilisant les 2 variables ci-dessous :</p>
-            <p class="exercice-txt">"Firstname</i> a obtenu <i>score</i> points à cette partie."</p>
+            <p class="exercice-txt">"<i>Firstname</i> a obtenu <i>score</i> points à cette partie."</p>
             <div class="exercice-sandbox">
             <?php
                 $firstname = "Michel";
                 $score = 327;
-                echo "<p>{$firstname} a obtenu {$score} points à cette partie.</p>";
             ?>
             </div>
         </section>
@@ -52,12 +51,6 @@
                 $priceProduct2 = 2.90;
                 $nameProduct3 = "potion";
                 $priceProduct3 = 5.20;
-
-               echo "<ul>
-                    <li>un {$nameProduct1} coûte {$priceProduct1}</li>
-                    <li>une {$nameProduct2} coûte {$priceProduct2}</li>
-                    <li>une {$nameProduct3} coûte {$priceProduct3}</li>
-                </ul>";
             ?>
             </div>
         </section>
@@ -71,14 +64,6 @@
                 $quantityProduct1 = 1;
                 $quantityProduct2 = 10;
                 $quantityProduct3 = 4;
-
-                $nameProduct1 = $priceProduct1 * $quantityProduct1;
-                $nameProduct2 = $quantityProduct2 * $priceProduct2;
-                $nameProduct3 = $priceProduct3 * $quantityProduct3;
-               echo $totalPrice = $nameProduct1 + $nameProduct2 + $nameProduct3;
-               echo $reduction = 10 / 100;
-               echo $totalPriceWithReduction = $totalPrice * $reduction;
-
             ?>
             </div>
         </section>
