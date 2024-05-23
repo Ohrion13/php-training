@@ -85,7 +85,44 @@ try {
             <p class="exercice-txt">Afficher une seule série par ligne sur les plus petits écrans, 2 séries par ligne sur les écrans intermédiaires et 4 séries par ligne sur un écran d'ordinateur.</p>
             <div class="exercice-sandbox">
 
-            
+                <?php
+
+                function returnsSeriesWithImagesAndTitles($array)
+                {
+                    $output = "<div class='series-container'>";
+
+                    foreach ($array as $serie) {
+                        $output .= "<div>";
+                        $output .= "<h3>{$serie['name']}</h3>";
+                        $output .= "<img src='{$serie['image']}'>";
+                        $output .= "</div>";
+                    }
+
+                    $output .= "</div>";
+
+                    $screenWidth = 700;
+
+                    if ($screenWidth > 700) {
+
+                        $output .=
+                            "<style>
+
+                                .series-container {
+                                    display: grid;
+                                    grid-template-columns: repeat(2, 1fr);
+                                    gap: 2rem;
+                                }
+
+                            </style>";
+                    }
+
+                    return $output;
+                }
+
+                print_r(returnsSeriesWithImagesAndTitles($series));
+
+                ?>
+
 
             </div>
         </section>
