@@ -289,9 +289,7 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
 
                 function returnsSomeValuesFromArray($array, $number)
                 {
-
                     return array_slice($array, 0, $number);
-
                 }
 
                 print_r(returnsSomeValuesFromArray($array, 3));
