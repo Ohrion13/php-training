@@ -91,8 +91,10 @@ $fruits = ["fraise", "banane", "pomme", "cerise", "abricot", "pêche", "ananas",
                 <ul>
                     <?php
 
-                    foreach ($fruits as $array[0 % 2] => $fruit) {
-                        echo "<li>$array : $fruit</li>";
+                    foreach ($fruits as $i => $fruit) {
+                        if ($i % 2 === 0) {
+                            echo "<li>" . $fruit . "</li>";
+                        }
                     }
 
                     ?>
@@ -127,6 +129,20 @@ $fruits = ["fraise", "banane", "pomme", "cerise", "abricot", "pêche", "ananas",
             <p class="exercice-txt">Afficher les fruits dont la chaîne de caractère est composée de 5 caractères au maximum</p>
             <div class="exercice-sandbox">
 
+                <ul>
+                    <?php
+
+                    foreach ($fruits as $fruit) {
+
+                        if (mb_strlen($fruit) <= 5) {
+
+                            echo "<li>$fruit</li>";
+                        }
+                    }
+
+                    ?>
+                </ul>
+
             </div>
         </section>
 
@@ -139,6 +155,16 @@ $fruits = ["fraise", "banane", "pomme", "cerise", "abricot", "pêche", "ananas",
             <p class="exercice-txt">Dans la phrase suivante : "<?= $breakfast ?>"</p>
             <p class="exercice-txt">Remplacez pomme par pêche et banane par mangue et affichez-la.</p>
             <div class="exercice-sandbox">
+
+                </p>
+
+                <?php
+                $breakfast = str_replace("pomme", "pêche", $breakfast);
+                echo str_replace("banane", "mangue", $breakfast);
+
+                ?>
+
+                </p>
 
             </div>
         </section>

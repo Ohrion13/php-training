@@ -141,4 +141,90 @@ $fruits = ["fraise", "banane", "pomme", "cerise", "abricot", "pêche", "ananas",
             </div>
         </section>
 
-        
+                <!-- QUESTION 7 -->
+                <section class="exercice">
+            <h2 class="exercice-ttl">Question 7</h2>
+            <p class="exercice-txt">Afficher les fruits dont la chaîne de caractère est composée de 5 caractères au maximum</p>
+            <div class="exercice-sandbox">
+                <ul>
+                    <?php
+                    foreach ($fruits as $fruit) {
+                        if (mb_strlen($fruit) <= 5) {
+                            echo "<li>{$fruit}</li>";
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+        </section>
+
+        <!-- QUESTION 8 -->
+        <?php
+        $breakfast = "Tous les matins je mange une pomme et une banane avec une cuillère de miel.";
+        ?>
+        <section class="exercice">
+            <h2 class="exercice-ttl">Question 8</h2>
+            <p class="exercice-txt">Dans la phrase suivante : "<?= $breakfast ?>"</p>
+            <p class="exercice-txt">Remplacez pomme par pêche et banane par mangue et affichez-la.</p>
+            <div class="exercice-sandbox">
+                <p>
+                    <?php
+                    echo str_replace(
+                        ['pomme', 'banane', 'miel'],
+                        ['pêche', 'mangue', 'sirop d\'agave'],
+                        $breakfast
+                    );
+                    ?>
+                </p>
+            </div>
+        </section>
+
+        <!-- QUESTION 9 -->
+        <section class="exercice">
+            <h2 class="exercice-ttl">Question 9</h2>
+            <p class="exercice-txt">Affichez la chaîne de caractère composée de l'ensemble des fruits de la liste, séparés par une virgule et un espace.</p>
+            <div class="exercice-sandbox">
+                <p> <?php
+                    // foreach($fruits as $i => $fruit){
+                    //     if($i === 0) echo ucfirst($fruit) . ', ';
+                    //     else if ($i === count($fruits) -1) echo $fruit . '.';
+                    //     else echo $fruit . ', ';
+                    // }
+                    echo ucfirst(implode(", ", $fruits)) . '.';
+                    ?></p>
+            </div>
+        </section>
+
+        <!-- QUESTION 10 -->
+        <?php
+
+        $salad = "Dans ma salade de fruit préférée, il y a de la banane, des pêches, quelques fraises, des noix et une cuillère de miel.";
+
+        ?>
+        <section class="exercice">
+            <h2 class="exercice-ttl">Question 10</h2>
+            <p class="exercice-txt">Afficher dans une liste HTML tous les fruits de la liste qui apparaissent dans la phrase suivante : "<?= $salad ?>"</p>
+            <div class="exercice-sandbox">
+                <ul>
+                    <?php
+                    // foreach ($fruits as $fruit) {
+                    //     if (stripos($salad, $fruit) !== false) {
+                    //         echo "<li>{$fruit}</li>";
+                    //     }
+                    // }
+
+                    foreach ($fruits as $fruit) {
+                        if (str_contains($salad, $fruit)) {
+                            echo "<li>{$fruit}</li>";
+                        }
+                    }
+
+                    ?>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <div class="copyright">© Guillaume Belleuvre, 2023 - DWWM</div>
+</body>
+
+</html>
