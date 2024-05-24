@@ -41,7 +41,13 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
 
                 <?php
 
-                function returnsStringAsList($array)
+                /**
+                 * Undocumented function
+                 *
+                 * @param array $array
+                 * @return string
+                 */
+                function returnsStringAsList(array $array): string
                 {
                     $values = "";
 
@@ -67,7 +73,13 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
 
                 <?php
 
-                function returnsSomeValues($array)
+                /**
+                 * Undocumented function
+                 *
+                 * @param array $array
+                 * @return string
+                 */
+                function returnsSomeValues(array $array): string
                 {
                     $values = "";
 
