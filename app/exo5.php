@@ -59,7 +59,7 @@ try {
 
                     foreach ($array as $value) {
 
-                        $newArray[] = ($value['availableOn']);
+                        $newArray[] = $value['availableOn'];
                     }
 
                     if ($optionalParameter) {
@@ -93,28 +93,12 @@ try {
 
                     foreach ($array as $serie) {
                         $output .= "<div>";
-                        $output .= "<h3>{$serie['name']}</h3>";
-                        $output .= "<img src='{$serie['image']}'>";
+                        $output .= "<h3> {$serie['name']}</h3>";
+                        $output .= "<a href='exo5.php?serie={$serie['id']}#question4'><img class='series-img' src='{$serie['image']}'></a>";
                         $output .= "</div>";
                     }
 
                     $output .= "</div>";
-
-                    $screenWidth = 700;
-
-                    if ($screenWidth > 700) {
-
-                        $output .=
-                            "<style>
-
-                                .series-container {
-                                    display: grid;
-                                    grid-template-columns: repeat(2, 1fr);
-                                    gap: 2rem;
-                                }
-
-                            </style>";
-                    }
 
                     return $output;
                 }
@@ -133,6 +117,8 @@ try {
             <p class="exercice-txt">Ajouter un lien aux séries listées ci-dessus menant à cette page avec en paramètre "serie", l'identifiant de la série</p>
             <div class="exercice-sandbox">
 
+
+
             </div>
         </section>
 
@@ -143,6 +129,35 @@ try {
             <p class="exercice-txt">Si l'URL de la page appelée comporte l'identifiant d'une série, alors afficher toutes les informations de la série ci-dessous.</p>
             <p class="exercice-txt">Si l'identifiant ne correspond à aucune série, afficher un message d'erreur.</p>
             <div class="exercice-sandbox">
+
+                <?php
+
+                function getInfoSeries(array $series)
+                {
+
+                    $newArray = [];
+
+
+                    foreach ($series as $index => $arrayInfo) {
+
+                        if ($_GET['serie'] == $arrayInfo['id']) {
+
+                            $newArray[] = $arrayInfo;
+
+                            return $newArray;
+                        }
+                        
+                        if ($_GET['serie'] != $arrayInfo['id']) {
+
+                            return '<p>identifiant :"' . $arrayInfo['id'] . '" est différent de celui de la page."</p>';
+                        }
+
+                    }
+                }
+
+                var_dump(getInfoSeries($series));
+
+                ?>
 
             </div>
         </section>
