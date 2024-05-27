@@ -1,7 +1,6 @@
 <?php
-
-include 'include/_include.php';
-include 'include/fonctions-series.php';
+include "./include/_functions.php";
+include "./include/_seriesFunctions.php";
 
 // Json file
 try {
@@ -54,28 +53,7 @@ try {
             <div class="exercice-sandbox">
 
                 <?php
-
-                function returnsBroadcastPlatformsAlphabeticalOrder($array, $optionalParameter = false)
-                {
-
-                    $newArray = [];
-
-                    foreach ($array as $value) {
-
-                        $newArray[] = $value['availableOn'];
-                    }
-
-                    if ($optionalParameter) {
-                        $newArray = array_unique($newArray);
-                    }
-
-                    sort($newArray);
-
-                    return $newArray;
-                }
-
-                print_r(returnsBroadcastPlatformsAlphabeticalOrder($series, true));
-
+                var_dump(getPlatformsFromSeries($series));
                 ?>
 
             </div>
@@ -87,30 +65,10 @@ try {
             <p class="exercice-txt">Afficher la liste de toutes les séries avec l'image principale et son titre</p>
             <p class="exercice-txt">Afficher une seule série par ligne sur les plus petits écrans, 2 séries par ligne sur les écrans intermédiaires et 4 séries par ligne sur un écran d'ordinateur.</p>
             <div class="exercice-sandbox">
-
                 <?php
-
-                function returnsSeriesWithImagesAndTitles($array)
-                {
-                    $output = "<div class='series-container'>";
-
-                    foreach ($array as $serie) {
-                        $output .= "<div>";
-                        $output .= "<h3> {$serie['name']}</h3>";
-                        $output .= "<a href='exo5.php?serie={$serie['id']}#question4'><img class='series-img' src='{$serie['image']}'></a>";
-                        $output .= "</div>";
-                    }
-
-                    $output .= "</div>";
-
-                    return $output;
-                }
-
-                print_r(returnsSeriesWithImagesAndTitles($series));
+                echo generateSeries($series);
 
                 ?>
-
-
             </div>
         </section>
 
@@ -119,9 +77,9 @@ try {
             <h2 class="exercice-ttl">Question 3</h2>
             <p class="exercice-txt">Ajouter un lien aux séries listées ci-dessus menant à cette page avec en paramètre "serie", l'identifiant de la série</p>
             <div class="exercice-sandbox">
+                <?php
 
-
-
+                ?>
             </div>
         </section>
 
@@ -132,34 +90,7 @@ try {
             <p class="exercice-txt">Si l'URL de la page appelée comporte l'identifiant d'une série, alors afficher toutes les informations de la série ci-dessous.</p>
             <p class="exercice-txt">Si l'identifiant ne correspond à aucune série, afficher un message d'erreur.</p>
             <div class="exercice-sandbox">
-
-                <?php
-
-                function getInfoSeries(array $series)
-                {
-
-                    $newArray = [];
-
-
-                    foreach ($series as $index => $arrayInfo) {
-
-                        if ($_GET['serie'] == $arrayInfo['id']) {
-
-                            $newArray[] = $arrayInfo;
-
-                            return $newArray;
-
-                            // } elseif ($_GET['serie'] != $arrayInfo['id']) {
-
-                            //     return '<p>identifiant :"' . $arrayInfo['id'] . '" est différent de celui de la page."</p>';
-                        }
-                    }
-                }
-
-                var_dump(getInfoSeries($series));
-
-                ?>
-
+                <?=generateSelectedShow($series)?>
             </div>
         </section>
 
@@ -168,27 +99,6 @@ try {
             <h2 class="exercice-ttl">Question 5</h2>
             <p class="exercice-txt">Récupérer dans un tableau l'ensemble des styles de séries dans une liste HTML. Afficher les par ordre alphabétique dans une liste HTML.</p>
             <div class="exercice-sandbox">
-
-                <?php
-
-                function getStylesFromSeries(array $series)
-                {
-                    $styles = [];
-
-                    foreach ($series as $show) {
-
-                        array_push($styles, ...$show["styles"]);
-                    }
-
-                    $styles = excludeDuplicates($styles);
-                    sort($styles);
-
-                    return $styles;
-                }
-
-                var_dump(getStylesFromSeries($series));
-
-                ?>
 
             </div>
         </section>
@@ -199,7 +109,7 @@ try {
             <p class="exercice-txt">Ajoutez après chaque style de la liste ci-dessus, le nombre de séries correspondantes entre parenthèses.</p>
             <div class="exercice-sandbox">
 
-
+            <?= generateStylesList($series) ?>
 
             </div>
         </section>
@@ -210,8 +120,6 @@ try {
             <p class="exercice-txt">Ajoutez un lien à chaque nom de style ci-dessus menant à cette page avec en paramètre "style" le nom du style.</p>
             <div class="exercice-sandbox">
 
-            <?= generateStylesList($series) ?>
-            
             </div>
         </section>
 

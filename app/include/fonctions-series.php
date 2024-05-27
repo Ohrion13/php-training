@@ -54,3 +54,110 @@ function generateSeries(array $series): string
         'series__itm'
     );
 }
+
+
+/**
+ * Get show informations from its ID.
+ *
+ * @param array $dataSeries The array containing series data.
+ * @param integer $id Show's ID you want the information of.
+ * @return array|null Show informations or null if no ID found.
+ */
+function getShowInformationsFromId(array $dataSeries, int $id): ?array
+{
+    // foreach ($dataSeries as $show) {
+    //     if ($show['id'] === $id) {
+    //         return $show;
+    //     }
+    // }
+    // return null;
+
+    $result = array_filter($dataSeries, fn ($s) => $s['id'] === $id);
+
+    if (count($result) !== 1) return null;
+
+    return current($result);
+}
+
+/**
+ * Get HTML code to display the show matching the id in the URL for the parameter 'serie'.
+ *
+ * @param array $series The array with all series data
+ * @return string
+ */
+function generateSelectedShow(array $series): string
+{
+    // Is there a selected show?
+    if (!isset($_GET['serie'])) {
+        return '<p class="warning">Aucune série sélectionnée.</p>';
+    }
+
+    // Get show informations from the selected id in the URL
+    $seriesData = getShowInformationsFromId($series, $_GET['serie']);
+
+    // There is no match
+    if (is_null($seriesData)) {
+        return '<p class="error">La série sélectionnée n\'existe pas.</p>';
+    }
+
+    // Return HTML code to display the selected show.
+    return  generateShow($seriesData, true);
+}
+/**
+ * Get the list of all styles and count them in the given array
+ * [
+ *    "style" => 6,
+ *    "style" => 2,
+ *    "style" => 3
+ * ]
+ * @param array $series The array with all series data
+ * @return array All the styles in alphabetic order
+ */
+function countStyles(array $series): array
+{
+    // $styles = [];
+    // foreach ($series as $show) {
+    //     //array_push($styles, ...$show['styles'] );
+    //     $styles = array_merge($styles, $show['styles']);
+    // }
+    $styles = array_merge(...array_column($series, 'styles'));
+    // $styles = excludeDuplicates($styles);
+    $styles = array_count_values($styles);
+    ksort($styles);
+    return $styles;
+}
+
+
+/**
+ * Get style label to display
+ *
+ * @param string $style Style name
+ * @param integer $nb Number of series
+ * @return string label to display the style
+ */
+function generateStyleLink(string $style, int $nb): string
+{
+    return '<a href="?style=' . urlencode($style) . '">' . $style . ' (' . $nb . ')</a>';
+}
+
+
+/**
+ * Generate HTML code to display styles list from given series. 
+ *
+ * @param array $series The array with all series data.
+ * @return string HTML code to display styles list.
+ */
+function generateStylesList(array $series): string
+{
+
+    $styles = countStyles($series);
+
+    // $newArray = [];
+    // foreach ($styles as $style => $nb) {
+    //     $newArray[] = "{$style} ({$nb})";
+    // }
+
+    $newArray = array_map("generateStyleLink", array_keys($styles), array_values($styles));
+
+    return getArrayAsHTMLList($newArray);
+}
